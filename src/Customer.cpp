@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Customer.hpp"
 #include "Order.hpp"
 
@@ -59,6 +60,22 @@ Customer &Customer::operator=(Customer &&rhs) noexcept
 
 void Customer::placeOrder(Order order)
 {
-    
+    orderHistory.push_back(order);
 }
 
+void Customer::viewOrderHistory() const
+{
+    if(orderHistory.size()){
+        for(size_t i = 0; i < orderHistory.size(); ++i){
+            orderHistory[i].displayOrder();
+        }
+    }
+    else{
+        std::cout<< "No orders have been placed yet.\n";
+    }
+}
+
+std::string Customer::getName() const 
+{
+    return name;
+}

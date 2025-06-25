@@ -8,6 +8,7 @@ class Order;
 
 class Customer{
 public:
+    Customer() = delete;
     Customer(std::string customerName, std::string contact);
     Customer(const Customer& other);
     Customer& operator=(const Customer& rhs);

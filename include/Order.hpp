@@ -8,6 +8,7 @@ class Dish;
 
 class Order{
 public:
+    Order() = delete;;
     Order(Customer* customer);
     Order(const Order& other);
     Order& operator=(const Order& other);
@@ -18,9 +19,9 @@ public:
     void addDish(Dish* dish);
     void calculateTotal();
     void displayOrder() const;
-    
+
 private:
-    Customer* customer;
+    Customer* m_customer;
     std::vector<Dish*> orderedDishes;
     double totalPrice;
 };
