@@ -89,8 +89,7 @@ Customer* Restaurant::getCustomerByName(const std::string &name) const
             return customers[i];
         }
     }
-    
-    std::cout << "No customer found with name "<< name<<std::endl;
+
     return nullptr;
 }
 
@@ -105,7 +104,6 @@ void Restaurant::placeNewOrder(std::string &customerName)
     }
     std::cout<<"Enter custormers contact info: ";
     std::string contact;
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     std::getline(std::cin, contact);
     customers.emplace_back(new Customer(customerName, contact));
 
@@ -151,10 +149,15 @@ void Restaurant::setMenu()
 
     switch(choice){
         case 1:
-            bool isSpicy;
+            int isSpicy;
             std::cout<<"Is this Appetizer spicy\n"
                     <<"Enter 1 for spicy or 0 for not spicy: ";
             std::cin>>isSpicy;
+            if (std::cin.fail()) {  
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                isSpicy = 1;
+            }
             dish = new Appetizer(dishName, dishPrice, isSpicy);
             break;
         case 2:
@@ -164,11 +167,16 @@ void Restaurant::setMenu()
             dish = new Entree(dishName, dishPrice, calories);
             break;
         case 3:
-            bool Nuts;
+            int nuts;
             std::cout<<"Does this Dessert contain nuts\n"
                     <<"Enter 1 for yes or 0 for no : ";
-            std::cin>>Nuts;
-            dish = new Dessert(dishName, dishPrice, Nuts);
+            std::cin>>nuts;
+            if (std::cin.fail()) {  
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                nuts = 1;
+            }
+            dish = new Dessert(dishName, dishPrice, nuts);
             break;
         default:
             std::cout<<"Invalid input!";
@@ -214,6 +222,7 @@ void Restaurant::acceptOrder(Customer* customer)
                 std::cout<<"Order is accepted:\n";
                 order.calculateTotal();
                 orders.push_back(order);
+                customer->placeOrder(order);
                 std::cout << "Order finalized. Total = " << order.getTotolPrice()<< "$\n";
                 break;
             }
@@ -229,6 +238,11 @@ void Restaurant::acceptOrder(Customer* customer)
 
 void Restaurant::displayCustomers() const
 {
+
+    if(customers.empty()){
+        std::cout<<"There is no customers yet: \n";
+    }
+
     for(size_t i = 0; i < customers.size(); ++i)
     {
         std::cout<<"----------------------------------\n"

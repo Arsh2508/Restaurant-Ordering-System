@@ -17,7 +17,7 @@ int main()
                 <<"5) Display orders\n"
                 <<"6) View customer's order History\n"
                 <<"0) Exit\n"
-                <<"----------------------------";
+                <<"----------------------------\n: ";
         
         std::cin>>choice;
 
@@ -56,7 +56,7 @@ int main()
                 std::cout<<"Exiting...\n";
                 break;
             default:
-                std::cout<<"Invalid input! Try again: ";
+                std::cout<<"Invalid input! Try again: \n";
                 break;
         }
     }
