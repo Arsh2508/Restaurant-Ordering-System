@@ -65,17 +65,22 @@ void Customer::placeOrder(Order order)
 
 void Customer::viewOrderHistory() const
 {
-    if(orderHistory.size()){
-        for(size_t i = 0; i < orderHistory.size(); ++i){
-            orderHistory[i].displayOrder();
-        }
-    }
-    else{
+    if(orderHistory.empty()){
         std::cout<< "No orders have been placed yet.\n";
+        return;
+    }
+
+    for(size_t i = 0; i < orderHistory.size(); ++i){
+        orderHistory[i].displayOrder();
     }
 }
 
 std::string Customer::getName() const 
 {
     return name;
+}
+
+std::string Customer::getContactInfo() const
+{
+    return contactInfo;
 }

@@ -5,7 +5,7 @@
 
 class Dish{
 public:
-    Dish();
+    Dish() = delete;
     Dish(std::string dishName, double dishPrice);
 
     Dish(const Dish& other);
@@ -13,9 +13,11 @@ public:
     Dish(Dish&& other) noexcept;
     Dish& operator=(Dish&& rhs) noexcept;
     
-    void display() const;
+    virtual void display() const;
     double getPrice() const;
     std::string getName() const;
+
+    virtual ~Dish() = default;
     
 protected:
     std::string name;

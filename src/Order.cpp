@@ -74,12 +74,19 @@ void Order::calculateTotal()
 
 void Order::displayOrder() const
 {
-    if(orderedDishes.size()){
-        for(size_t i = 0; i < orderedDishes.size(); ++i){
-            orderedDishes[i]->display();
-        }
-    }
-    else{
+    if(orderedDishes.empty()){
         std::cout<< "No order history available.\n";
+        return;
     }
+
+    for(size_t i = 0; i < orderedDishes.size(); ++i){
+        orderedDishes[i]->display();
+    }
+
+    std::cout<<"Total bill: "<< totalPrice <<std::endl;
+}
+
+double Order::getTotolPrice() const
+{
+    return totalPrice;
 }

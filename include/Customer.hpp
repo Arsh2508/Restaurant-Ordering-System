@@ -1,5 +1,5 @@
-#ifndef CUSTORMER_HPP
-#define CUSTORMER_HPP
+#ifndef CUSTOMER_HPP
+#define CUSTOMER_HPP
 
 #include <string>
 #include <vector>
@@ -21,6 +21,7 @@ public:
     void placeOrder(Order order);
     void viewOrderHistory() const;
     std::string getName() const;
+    std::string getContactInfo() const;
 
 
 private:

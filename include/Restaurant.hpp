@@ -9,7 +9,7 @@
 
 class Restaurant{
 public:
-    Restaurant();
+    Restaurant() = default;
     Restaurant(const Restaurant& other);
     Restaurant& operator=(const Restaurant& other);
     Restaurant(Restaurant&& other) noexcept;
@@ -17,10 +17,13 @@ public:
     ~Restaurant();
 
     void showMenu() const;
-    Customer* getCustomerByName(const std::string& name);
-    void placeNewOrder(const std::string& customerName);
+    Customer* getCustomerByName(const std::string& name) const;
+    void placeNewOrder(std::string& customerName);
     void viewCustomerOrderHistory(const std::string& customerName) const;
-    
+    void setMenu();
+    void acceptOrder(Customer * customer);
+    void displayCustomers() const;
+    void displayOrders() const;
 private:
     Menu menu;
     std::vector<Customer*> customers;

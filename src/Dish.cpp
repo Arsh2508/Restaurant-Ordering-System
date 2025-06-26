@@ -1,8 +1,6 @@
 #include <iostream>
 #include "Dish.hpp"
 
-Dish::Dish() = delete;
-
 Dish::Dish(std::string dishName, double dishPrice)
     : name{dishName}
     , price{dishPrice}
@@ -44,7 +42,10 @@ Dish &Dish::operator=(Dish &&rhs) noexcept
 
 void Dish::display() const
 {
-    std::cout << name << " - " << price <<"$\n";
+ std::cout << "-----------------------------------\n"
+              <<"Dish: "<< name
+              <<"\nPrice: " << price << "$\n"
+              <<"\n-----------------------------------\n";
 }
 
 double Dish::getPrice() const
@@ -93,7 +94,7 @@ Dessert::Dessert(std::string dishName, double dishPrice, bool nuts)
 void Dessert::display() const
 {
     std::cout << "-----------------------------------\n"
-              <<"Appetizer: "<< name
+              <<"Dessert: "<< name
               <<"\nPrice: " << price << "$\n"
               << (containNuts ? "Contains nuts!" : "Does not contain nuts.")
               <<"\n-----------------------------------\n";

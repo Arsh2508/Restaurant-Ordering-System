@@ -19,6 +19,7 @@ public:
     void addDish(Dish* dish);
     void calculateTotal();
     void displayOrder() const;
+    double getTotolPrice() const;
 
 private:
     Customer* m_customer;
