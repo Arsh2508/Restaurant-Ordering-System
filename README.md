@@ -15,19 +15,14 @@ This project is a console-based Restaurant Ordering System built in C++ using Ob
 ---
 
 ## 📁 Project Structure
-
+```
 .
-
 ├── build/ # Makefile is here
-
 ├── include/ # Header files
-
 ├── src/ # Source (.cpp) files
-
 ├── tests/ # Google Test unit tests
-
 └── README.md # This file
-
+```
 
 ---
 
@@ -40,7 +35,7 @@ This project is a console-based Restaurant Ordering System built in C++ using Ob
 To install Google Test globally:
 
 
-🚀 Build Instructions
+## 🚀 Build Instructions
 Clone the repository and build the project:
 ```bash
 sudo apt update
@@ -52,17 +47,23 @@ sudo cp *.a /usr/lib
 
 git clone <your-repo-url>
 cd your-repo-name/build
-
-# Build main program
+```
+- Build main program
+```
 make
-
-# Run the application
+```
+- Run the application
+```
 ./Restaurant
-
-🧪 Running Tests
-To run the unit tests:
+```
+## 🧪 Running Tests
+- To run the unit tests:
+```
 make test
+```
 This compiles tests/test.cpp along with the main source files (except main.cpp) and links against Google Test.
 
-To clean all build files:
+- To clean all build files:
+```
 make clean
+```
