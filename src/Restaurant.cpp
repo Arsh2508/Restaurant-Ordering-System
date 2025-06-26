@@ -199,6 +199,13 @@ void Restaurant::acceptOrder(Customer* customer)
                 <<"1) Order dish\n"
                 <<"2) Accept order\n";
         std::cin>>choice;
+        
+        if (std::cin.fail()) {
+            std::cin.clear(); 
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // discard invalid input
+            std::cout << "Invalid input! Please enter a number.\n";
+            continue; 
+        }        
 
         switch(choice){
             case 1:{
