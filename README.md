@@ -18,9 +18,13 @@ This project is a console-based Restaurant Ordering System built in C++ using Ob
 
 .
 ├── build/ # Makefile is here
+
 ├── include/ # Header files
+
 ├── src/ # Source (.cpp) files
+
 ├── tests/ # Google Test unit tests
+
 └── README.md # This file
 
 
