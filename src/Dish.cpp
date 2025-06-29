@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Dish.hpp"
 
-Dish::Dish(std::string dishName, double dishPrice)
+Dish::Dish(const std::string& dishName, double dishPrice)
     : name{dishName}
     , price{dishPrice}
 {}
@@ -58,7 +58,7 @@ std::string Dish::getName() const
     return name;
 }
 
-Appetizer::Appetizer(std::string dishName, double dishPrice, bool spicy)
+Appetizer::Appetizer(const std::string& dishName, double dishPrice, bool spicy)
     : Dish(dishName, dishPrice)
     , isSpicy{spicy}
 {}
@@ -72,7 +72,7 @@ void Appetizer::display() const
               <<"\n-----------------------------------\n";
 }
 
-Entree::Entree(std::string dishName, double dishPrice, int cal)
+Entree::Entree(const std::string& dishName, double dishPrice, int cal)
     : Dish(dishName, dishPrice)
     , calories{cal}
 {}
@@ -86,7 +86,7 @@ void Entree::display() const
               << "\n-----------------------------------\n";
 }
 
-Dessert::Dessert(std::string dishName, double dishPrice, bool nuts)
+Dessert::Dessert(const std::string& dishName, double dishPrice, bool nuts)
     : Dish(dishName, dishPrice)
     , containNuts{nuts}
 {}

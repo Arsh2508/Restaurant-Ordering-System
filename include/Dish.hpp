@@ -6,7 +6,7 @@
 class Dish{
 public:
     Dish() = delete;
-    Dish(std::string dishName, double dishPrice);
+    Dish(const std::string& dishName, double dishPrice);
 
     Dish(const Dish& other);
     Dish& operator=(const Dish& rhs);
@@ -27,7 +27,7 @@ protected:
 
 class Appetizer : public Dish{
 public:
-    Appetizer(std::string dishName, double dishPrice, bool spicy);
+    Appetizer(const std::string& dishName, double dishPrice, bool spicy);
     void display() const;
 private:
     bool isSpicy;
@@ -35,7 +35,7 @@ private:
 
 class Entree : public Dish{
 public:
-    Entree(std::string dishName, double dishPrice, int cal);
+    Entree(const std::string& dishName, double dishPrice, int cal);
     void display() const;
 private:
     int calories; 
@@ -43,7 +43,7 @@ private:
 
 class Dessert : public Dish{
 public:
-    Dessert(std::string dishName, double dishPrice, bool nuts);
+    Dessert(const std::string& dishName, double dishPrice, bool nuts);
     void display() const;
 private:
     bool containNuts;
