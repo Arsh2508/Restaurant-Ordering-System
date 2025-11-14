@@ -20,6 +20,7 @@ int main()
                 <<"----------------------------\n: ";
         
         std::cin>>choice;
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
         switch (choice){
             case 1:
@@ -32,7 +33,6 @@ int main()
             {
                 std::string name;
                 std::cout<<"Input custormer's name: ";
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::getline(std::cin, name);
                 restaurant.placeNewOrder(name);
                 break;
@@ -47,7 +47,6 @@ int main()
             {
                 std::string name;
                 std::cout<<"Enter custormer's name to view orders: ";
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 std::getline(std::cin, name);
                 restaurant.viewCustomerOrderHistory(name);
                 break;

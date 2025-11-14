@@ -2,9 +2,10 @@
 #define ORDER_HPP
 
 #include <vector>
+#include <memory>
 
 class Customer;
-class Dish;
+class FoodItem;
 
 class Order{
 public:
@@ -16,15 +17,15 @@ public:
     Order& operator=(Order&& other) noexcept;
     ~Order() = default;
 
-    void addDish(Dish* dish);
+    void addItem(std::shared_ptr<FoodItem> item);
     void calculateTotal();
     void displayOrder() const;
-    double getTotolPrice() const;
+    double getTotalPrice() const;
 
 private:
     Customer* m_customer;
-    std::vector<Dish*> orderedDishes;
     double totalPrice;
+    std::vector<std::shared_ptr<FoodItem>> orderedItems;
 };
 
 #endif

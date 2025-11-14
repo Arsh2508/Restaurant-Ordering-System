@@ -1,13 +1,14 @@
 #include <iostream>
+#include <memory>
 #include "Menu.hpp"
-#include "Dish.hpp"
+#include "FoodItem.hpp"
 
 Menu::Menu() = default;
 
 Menu::Menu(const Menu &other)
 {
-    for(size_t i = 0; i < other.dishes.size(); ++i){
-        dishes.push_back(new Dish(*other.dishes[i]));
+    for(size_t i = 0; i < other.FoodItemes.size(); ++i){
+        FoodItemes.push_back(std::make_shared<FoodItem>(*other.FoodItemes[i]));
     }
 }
 
@@ -17,23 +18,19 @@ Menu &Menu::operator=(const Menu &rhs)
         return *this;
     }
 
-    for(size_t i = 0; i < dishes.size(); ++i){
-        delete dishes[i];
-    }
+    FoodItemes.clear();
 
-    dishes.clear();
-
-    for(size_t i = 0; i < rhs.dishes.size(); ++i){
-        dishes.push_back(new Dish(*rhs.dishes[i]));
+    for(size_t i = 0; i < rhs.FoodItemes.size(); ++i){
+        FoodItemes.push_back(std::make_shared<FoodItem>(*rhs.FoodItemes[i]));
     }
 
     return *this;
 }
 
 Menu::Menu(Menu &&other) noexcept 
-    : dishes{std::move(other.dishes)}
+    : FoodItemes{std::move(other.FoodItemes)}
 {
-    other.dishes.clear();
+    other.FoodItemes.clear();
 }
 
 Menu &Menu::operator=(Menu &&rhs) noexcept
@@ -42,31 +39,30 @@ Menu &Menu::operator=(Menu &&rhs) noexcept
         return *this;
     }
 
-    dishes = std::move(rhs.dishes);
-    rhs.dishes.clear();
+    FoodItemes = std::move(rhs.FoodItemes);
+    rhs.FoodItemes.clear();
 
     return *this;
 }
 
 Menu::~Menu()
 {
-    for(size_t i = 0; i < dishes.size(); ++i){
-        delete dishes[i];
-    }
+    FoodItemes.clear();
 }
 
-void Menu::addDish(Dish *dish)
+
+void Menu::addItem(std::shared_ptr<FoodItem> foodItem)
 {
-    if(dish){
-        dishes.push_back(dish);
+    if(foodItem){
+        FoodItemes.push_back(foodItem);
     }
 }
 
 void Menu::displayMenu() const
 {
-    if(dishes.size()){
-        for(size_t i = 0; i < dishes.size(); ++i){
-            dishes[i]->display();
+    if(FoodItemes.size()){
+        for(size_t i = 0; i < FoodItemes.size(); ++i){
+            FoodItemes[i]->display();
         }
     }
     else{
@@ -74,12 +70,18 @@ void Menu::displayMenu() const
     }
 }
 
-Dish *Menu::getDishByName(const std::string &dishName) const
+FoodItem *Menu::getItemByName(const std::string &itemName) const
 {
-    for(size_t i = 0; i < dishes.size(); ++i){
-        if(dishes[i]->getName() == dishName){
-            return dishes[i];
+    for(size_t i = 0; i < FoodItemes.size(); ++i){
+        if(FoodItemes[i]->getName() == itemName){
+            return FoodItemes[i].get();
         }
     }
+
     return nullptr;
+}
+
+const std::vector<std::shared_ptr<FoodItem>>& Menu::getItems() const
+{
+    return FoodItemes;
 }

@@ -2,8 +2,10 @@
 #define MENU_HPP
 
 #include <vector>
+#include <memory>
 #include <string>
-class Dish;
+
+class FoodItem;
 
 class Menu{
 public:
@@ -14,12 +16,13 @@ public:
     Menu& operator=(Menu&& rhs) noexcept;
     ~Menu();
 
-    void addDish(Dish* dish);
+    void addItem(std::shared_ptr<FoodItem> FoodItem);
     void displayMenu() const;
-    Dish* getDishByName(const std::string& dishName) const;
+    FoodItem* getItemByName(const std::string& itemName) const;
+    const std::vector<std::shared_ptr<FoodItem>>& getItems() const;
 
 private:
-    std::vector<Dish*> dishes;
+    std::vector<std::shared_ptr<FoodItem>> FoodItemes;
 };
 
 #endif

@@ -1,17 +1,18 @@
 #include <iostream>
 #include "Order.hpp"
-#include "Dish.hpp"
+#include "FoodItem.hpp"
 
 Order::Order(Customer *customer)
     : m_customer{customer}
+    , totalPrice{0.0}
 {}
 
 Order::Order(const Order &other)
     : m_customer{other.m_customer}
     , totalPrice{other.totalPrice}
 {
-    for(size_t i = 0; i < other.orderedDishes.size(); ++i){
-        orderedDishes.push_back(other.orderedDishes[i]);
+    for(size_t i = 0; i < other.orderedItems.size(); ++i){
+        orderedItems.push_back(other.orderedItems[i]);
     }
 }
 
@@ -23,10 +24,10 @@ Order &Order::operator=(const Order &other)
     m_customer = other.m_customer;
     totalPrice = other.totalPrice;
 
-    orderedDishes.clear();
+    orderedItems.clear();
 
-    for(size_t i = 0; i < other.orderedDishes.size(); ++i){
-        orderedDishes.push_back(other.orderedDishes[i]);
+    for(size_t i = 0; i < other.orderedItems.size(); ++i){
+        orderedItems.push_back(other.orderedItems[i]);
     }
 
     return *this;
@@ -35,9 +36,9 @@ Order &Order::operator=(const Order &other)
 Order::Order(Order &&other) noexcept
     : m_customer{std::move(other.m_customer)}
     , totalPrice{other.totalPrice}
-    , orderedDishes{std::move(other.orderedDishes)}
+    , orderedItems{std::move(other.orderedItems)}
 {
-    other.orderedDishes.clear();
+    other.orderedItems.clear();
 }
 
 Order &Order::operator=(Order &&other) noexcept
@@ -48,25 +49,25 @@ Order &Order::operator=(Order &&other) noexcept
 
     m_customer = std::move(other.m_customer);
     totalPrice = other.totalPrice;
-    orderedDishes = std::move(other.orderedDishes);
+    orderedItems = std::move(other.orderedItems);
 
-    other.orderedDishes.clear();
+    other.orderedItems.clear();
 
     return *this;
 }
 
-void Order::addDish(Dish* dish) 
+void Order::addItem(std::shared_ptr<FoodItem> item) 
 {
-    orderedDishes.push_back(dish);
+    orderedItems.push_back(item);
 }
 
 void Order::calculateTotal()
 {
     double total = 0.0;
 
-    for(size_t i = 0; i < orderedDishes.size(); ++i)
+    for(size_t i = 0; i < orderedItems.size(); ++i)
     {
-        total += (orderedDishes[i])->getPrice();
+        total += (orderedItems[i])->getPrice();
     }
 
     totalPrice = total;
@@ -74,19 +75,19 @@ void Order::calculateTotal()
 
 void Order::displayOrder() const
 {
-    if(orderedDishes.empty()){
+    if(orderedItems.empty()){
         std::cout<< "No order history available.\n";
         return;
     }
 
-    for(size_t i = 0; i < orderedDishes.size(); ++i){
-        orderedDishes[i]->display();
+    for(size_t i = 0; i < orderedItems.size(); ++i){
+        orderedItems[i]->display();
     }
 
     std::cout<<"Total bill: "<< totalPrice <<std::endl;
 }
 
-double Order::getTotolPrice() const
+double Order::getTotalPrice() const
 {
     return totalPrice;
 }

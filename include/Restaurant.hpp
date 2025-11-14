@@ -2,6 +2,8 @@
 #define RESTAURANT_HPP
 
 #include <vector>
+#include <memory>
+#include <string>
 
 #include "Menu.hpp"
 #include "Customer.hpp"
@@ -9,12 +11,18 @@
 
 class Restaurant{
 public:
-    Restaurant() = default;
-    Restaurant(const Restaurant& other);
-    Restaurant& operator=(const Restaurant& other);
-    Restaurant(Restaurant&& other) noexcept;
-    Restaurant& operator=(Restaurant&& other) noexcept;
-    ~Restaurant();
+    Restaurant();
+    
+    static Restaurant& getInstance() {
+        static Restaurant instance;
+        return instance;
+    }   
+
+    Restaurant(const Restaurant&) = delete;
+    Restaurant& operator=(const Restaurant&) = delete;
+    Restaurant(Restaurant&&) noexcept = delete;
+    Restaurant& operator=(Restaurant&&) noexcept = delete;
+    ~Restaurant() = default;
 
     void showMenu() const;
     Customer* getCustomerByName(const std::string& name) const;
@@ -24,10 +32,12 @@ public:
     void acceptOrder(Customer * customer);
     void displayCustomers() const;
     void displayOrders() const;
+    void loadMenuFromJSON(const std::string& filePath);
+
 private:
     Menu menu;
-    std::vector<Customer*> customers;
-    std::vector<Order> orders;
+    std::vector<std::shared_ptr<Customer>> customers;
+    std::vector<std::shared_ptr<Order>> orders;
 
 };
 

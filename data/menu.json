@@ -1,0 +1,46 @@
+{
+  "menuItems": [
+    {
+      "id": 1,
+      "name": "Cheeseburger",
+      "category": "Main",
+      "price": 8.99
+    },
+    {
+      "id": 2,
+      "name": "Margherita Pizza",
+      "category": "Main",
+      "price": 10.50
+    },
+    {
+      "id": 3,
+      "name": "Caesar Salad",
+      "category": "Appetizer",
+      "price": 6.25
+    },
+    {
+      "id": 4,
+      "name": "French Fries",
+      "category": "Side",
+      "price": 3.50
+    },
+    {
+      "id": 5,
+      "name": "Coca Cola",
+      "category": "Drink",
+      "price": 2.00
+    },
+    {
+      "id": 6,
+      "name": "Orange Juice",
+      "category": "Drink",
+      "price": 2.50
+    },
+    {
+      "id": 7,
+      "name": "Chocolate Cake",
+      "category": "Dessert",
+      "price": 4.75
+    }
+  ]
+}
